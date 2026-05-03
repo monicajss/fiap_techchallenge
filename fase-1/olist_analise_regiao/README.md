@@ -1,4 +1,4 @@
-# Olist Analise de Receita
+# Olist Analise de Receita por UF
 
 Projeto de analise exploratoria de receita a partir da base publica da Olist, com foco em consolidacao de pedidos, clientes e itens do pedido para gerar visualizacoes por UF.
 
