@@ -1,53 +1,48 @@
 # Classificação da qualidade de vinhos
 
-Projeto de análise de dados e aprendizado de máquina para classificar vinhos tintos a partir de características físico-químicas.
+Este projeto faz parte do Tech Challenge da fase 2 da Pós Tech em Data Analytics da FIAP.
 
-A variável alvo é `quality_binary`:
+A ideia é usar dados sobre as características dos vinhos para identificar se eles são de alta qualidade ou de baixa/média qualidade.
 
-- `1`: vinho de alta qualidade (`quality >= 7`);
-- `0`: vinho de baixa ou média qualidade (`quality < 7`).
+Para isso, a coluna `quality` foi transformada em uma nova variável chamada `quality_binary`:
 
-## Sobre o dataset
+- `1` para vinhos com qualidade maior ou igual a 7;
+- `0` para vinhos com qualidade menor que 7.
 
-O conjunto possui 1.143 registros e inclui acidez fixa e volátil, ácido cítrico, açúcar residual, cloretos, dióxido de enxofre, densidade, pH, sulfatos, teor alcoólico e a avaliação de qualidade de cada vinho.
+## Sobre a base
 
-## Estrutura do projeto
+A base tem 1.143 registros de vinhos tintos. Entre as informações disponíveis estão acidez, açúcar residual, cloretos, densidade, pH, sulfatos, teor alcoólico e qualidade.
 
-```text
-.
-├── data/
-│   └── winequality-red.csv
-├── notebooks/
-│   └── Notebook_Vinhos.ipynb
-├── src/
-│   └── README.md
-├── results/
-│   ├── balanceamento_classes.png
-│   └── matriz_correlacao.png
-├── requirements.txt
-└── README.md
-```
+## O que foi feito até agora
 
-## Como executar
+- leitura e conferência da base;
+- análise exploratória dos dados;
+- criação da variável alvo;
+- separação das variáveis preditoras em `X` e da variável alvo em `Y`;
+- divisão dos dados entre treino e teste, mantendo a proporção das classes.
 
-Requer Python 3.10 ou superior.
+A próxima etapa é treinar e comparar os modelos de Regressão Logística, Árvore de Decisão, Random Forest e SVM.
+
+## Organização das pastas
+
+- `data/`: base de dados utilizada;
+- `notebooks/`: notebook com a análise;
+- `results/`: gráficos gerados durante a análise;
+- `src/`: espaço para scripts auxiliares;
+- `requirements.txt`: bibliotecas necessárias para rodar o projeto.
+
+## Como rodar
+
+Na pasta `fase-2`, instale as bibliotecas:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
 pip install -r requirements.txt
+```
+
+Depois, abra o notebook:
+
+```bash
 jupyter lab notebooks/Notebook_Vinhos.ipynb
 ```
 
-No Windows, ative o ambiente com `.venv\\Scripts\\activate`.
-
-Depois de abrir o notebook, selecione **Executar tudo**. O notebook encontra o dataset automaticamente quando iniciado pela raiz do projeto ou pela pasta `notebooks/`. Os gráficos gerados são salvos em `results/`.
-
-## Etapas presentes no notebook
-
-1. compreensão do problema;
-2. análise exploratória dos dados;
-3. preparação das variáveis para machine learning.
-
-A coluna `quality` não é usada como entrada do modelo, pois ela origina a variável alvo e causaria vazamento de informação.
+Com o notebook aberto, basta executar as células na ordem. Os gráficos serão salvos automaticamente na pasta `results/`.
