@@ -1,4 +1,4 @@
-# Tech Challenge - Fase 1
+# Tech Challenge - Fase 2
 
 ## Case Classificando a qualidade de vinhos com Machine Learning
 
