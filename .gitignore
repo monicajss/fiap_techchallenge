@@ -1,2 +1,6 @@
 **/.DS_Store
 fase-1/olist_analise_receita/archive/**
+.venv/
+venv/
+**/.venv/
+**/venv/

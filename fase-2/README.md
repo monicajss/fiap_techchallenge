@@ -7,6 +7,10 @@ A variável alvo é `quality_binary`:
 - `1`: vinho de alta qualidade (`quality >= 7`);
 - `0`: vinho de baixa ou média qualidade (`quality < 7`).
 
+## Sobre o dataset
+
+O conjunto possui 1.143 registros e inclui acidez fixa e volátil, ácido cítrico, açúcar residual, cloretos, dióxido de enxofre, densidade, pH, sulfatos, teor alcoólico e a avaliação de qualidade de cada vinho.
+
 ## Estrutura do projeto
 
 ```text
