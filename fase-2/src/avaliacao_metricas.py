@@ -1,7 +1,9 @@
 """Cálculo e exibição das métricas dos modelos de classificação."""
 
+from pathlib import Path
 from typing import Any
 
+import pandas as pd
 from sklearn.metrics import (
     accuracy_score,
     classification_report,
@@ -39,3 +41,23 @@ def avaliar_modelo(y_real: Any, y_predito: Any, y_probabilidade: Any) -> dict[st
     )
 
     return metricas
+
+
+def salvar_metricas_csv(
+    metricas_modelos: pd.DataFrame,
+    results_dir: str | Path | None = None,
+) -> Path:
+    """Salva as métricas dos modelos em CSV e retorna o caminho criado."""
+    if results_dir is None:
+        results_dir = (
+            Path("../results") if Path.cwd().name == "notebooks" else Path("results")
+        )
+
+    results_path = Path(results_dir)
+    results_path.mkdir(parents=True, exist_ok=True)
+    arquivo_csv = results_path / "metricas_modelos.csv"
+
+    metricas_modelos.to_csv(arquivo_csv, index=False)
+    print(f"Arquivo salvo em: {arquivo_csv}")
+
+    return arquivo_csv
