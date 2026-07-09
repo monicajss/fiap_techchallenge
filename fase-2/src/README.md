@@ -1,3 +1,8 @@
 # Scripts auxiliares
 
-Esta pasta é destinada a scripts reutilizáveis de pré-processamento, treinamento e avaliação que forem extraídos do notebook durante a evolução do projeto.
+Esta pasta contém funções auxiliares utilizadas no notebook principal.
+
+## Arquivos
+
+- `feature_engineering.py`: contém funções para criação de novas variáveis a partir das características físico-químicas dos vinhos.
+- `avaliacao_metricas.py`: contém funções auxiliares para avaliação dos modelos e exportação das métricas.
