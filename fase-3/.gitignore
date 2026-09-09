@@ -1,0 +1,36 @@
+# Arquivos temporários do macOS
+.DS_Store
+**/.DS_Store
+
+# Backup/temporários do Draw.io
+.*.bkp
+.*.dtmp
+**/.*.bkp
+**/.*.dtmp
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Ambiente local / configs
+.env
+.env.*
+
+# VS Code
+.vscode/
+
+# Outputs locais
+output/
+out/
+results/
