@@ -130,7 +130,14 @@ colunas_ia = [
     'ia_prioridade_negocio',
     'ia_nao_prioridade',
     'ia_desafio_roi',
-    'ia_desafio_dado_pronto'
+    'ia_desafio_time_dados_pronto_para_ia',
+    'ia_motivo_falta_compreensao',
+    'ia_motivo_falta_confiabilidade',
+    'ia_motivo_incerteza_regulacao',
+    'ia_motivo_seguranca_privacidade',
+    'ia_motivo_falta_expertise',
+    'ia_motivo_alta_direcao_nao_ve_valor',
+    'ia_motivo_propriedade_intelectual'
 ]
 
 existentes_ia = [c for c in colunas_ia if c in df.columns]
@@ -167,5 +174,10 @@ if existentes_ia:
 else:
     print('[AVISO] Nenhuma coluna de IA encontrada.')
 
+# ---- AGREGAÇÃO 8: Distribuição por setor ----
+agregar_dimensao(df, 'setor', 'setor')
+
+# ---- AGREGAÇÃO 9: Tamanho do time de dados ----
+agregar_dimensao(df, 'tamanho_time_dados', 'tamanho_time_dados')
+
 job.commit()
-print("Curated layer concluída com sucesso!")

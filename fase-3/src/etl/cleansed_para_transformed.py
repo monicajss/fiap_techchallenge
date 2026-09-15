@@ -113,6 +113,10 @@ df_harmonized = (
         'p2_h_faixa_salarial',
         '2_h_faixa_salarial'
     ], termos=['faixa', 'salarial']))
+    .withColumn('setor', coalesce_cols([
+        'p2_b_setor',
+        '2_b_setor'
+    ], termos=['setor']))
     .withColumn('mudar_emprego_6m', coalesce_cols([
         'p2_n_voce_pretende_mudar_de_emprego_nos_proximos_6_meses',
         '2_n_planos_de_mudar_de_emprego_6m'
@@ -352,11 +356,46 @@ df_harmonized = (
         '3_g_5_retorno_sobre_investimento_roi_nao_comprovado_de_ia_generativa',
         '3_h_5_retorno_sobre_investimento_roi_nao_comprovado_de_ia_generativa'
     ], termos=['roi']))
-    .withColumn('ia_desafio_dado_pronto', indicador_binario([
+    .withColumn('ia_desafio_time_dados_pronto_para_ia', indicador_binario([
         'p3_g_6_dados_da_empresa_nao_estao_prontos_para_uso_de_ia_generativa',
         '3_g_6_dados_da_empresa_nao_estao_prontos_para_uso_de_ia_generativa',
         '3_h_6_dados_da_empresa_nao_estao_prontos_para_uso_de_ia_generativa'
     ], termos=['dados_da_empresa', 'nao_estao_prontos']))
+    .withColumn('ia_motivo_falta_compreensao', indicador_binario([
+        'p3_g_1_falta_de_compreensao_dos_casos_de_uso',
+        '3_g_1_falta_de_compreensao_dos_casos_de_uso',
+        '3_h_1_falta_de_compreensao_dos_casos_de_uso'
+    ], termos=['compreensao', 'casos_de_uso']))
+    .withColumn('ia_motivo_falta_confiabilidade', indicador_binario([
+        'p3_g_2_falta_de_confiabilidade_das_saidas_alucinacao_dos_modelos',
+        '3_g_2_falta_de_confiabilidade_das_saidas_alucinacao_dos_modelos',
+        '3_h_2_falta_de_confiabilidade_das_saidas_alucinacao_dos_modelos'
+    ], termos=['confiabilidade', 'alucinacao']))
+    .withColumn('ia_motivo_incerteza_regulacao', indicador_binario([
+        'p3_g_3_incerteza_em_relacao_a_regulamentacao',
+        '3_g_3_incerteza_em_relacao_a_regulamentacao',
+        '3_h_3_incerteza_em_relacao_a_regulamentacao'
+    ], termos=['incerteza', 'regulamentacao']))
+    .withColumn('ia_motivo_seguranca_privacidade', indicador_binario([
+        'p3_g_4_preocupacoes_com_seguranca_e_privacidade_de_dados',
+        '3_g_4_preocupacoes_com_seguranca_e_privacidade_de_dados',
+        '3_h_4_preocupacoes_com_seguranca_e_privacidade_de_dados'
+    ], termos=['seguranca', 'privacidade']))
+    .withColumn('ia_motivo_falta_expertise', indicador_binario([
+        'p3_g_7_falta_de_expertise_ou_falta_de_recursos',
+        '3_g_7_falta_de_expertise_ou_falta_de_recursos',
+        '3_h_7_falta_de_expertise_ou_falta_de_recursos'
+    ], termos=['expertise', 'recursos']))
+    .withColumn('ia_motivo_alta_direcao_nao_ve_valor', indicador_binario([
+        'p3_g_8_alta_direcao_da_empresa_nao_ve_valor_ou_nao_ve_como_prioridade',
+        '3_g_8_alta_direcao_da_empresa_nao_ve_valor_ou_nao_ve_como_prioridade',
+        '3_h_8_alta_direcao_da_empresa_nao_ve_valor_ou_nao_ve_como_prioridade'
+    ], termos=['alta_direcao', 'valor']))
+    .withColumn('ia_motivo_propriedade_intelectual', indicador_binario([
+        'p3_g_9_preocupacoes_com_propriedade_intelectual',
+        '3_g_9_preocupacoes_com_propriedade_intelectual',
+        '3_h_9_preocupacoes_com_propriedade_intelectual'
+    ], termos=['propriedade_intelectual']))
 )
 
 colunas_finais = [
@@ -365,6 +404,7 @@ colunas_finais = [
     'cargo',
     'senioridade',
     'faixa_salarial',
+    'setor',
     'mudar_emprego_6m',
     'criterios_escolha_emprego',
     'motivo_escolha_salario',
@@ -412,12 +452,17 @@ colunas_finais = [
     'ia_prioridade_negocio',
     'ia_nao_prioridade',
     'ia_desafio_roi',
-    'ia_desafio_dado_pronto'
+    'ia_desafio_time_dados_pronto_para_ia',
+    'ia_motivo_falta_compreensao',
+    'ia_motivo_falta_confiabilidade',
+    'ia_motivo_incerteza_regulacao',
+    'ia_motivo_seguranca_privacidade',
+    'ia_motivo_falta_expertise',
+    'ia_motivo_alta_direcao_nao_ve_valor',
+    'ia_motivo_propriedade_intelectual'
 ]
 
 df_harmonized = df_harmonized.select(*colunas_finais)
 df_harmonized.write.mode('overwrite').partitionBy('ano_pesquisa').parquet(saida)
 
-print(f"Transformed salvo em: {saida}")
-print(f"Registros harmonizados: {df_harmonized.count()}")
 job.commit()
