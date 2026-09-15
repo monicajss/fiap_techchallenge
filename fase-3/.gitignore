@@ -34,3 +34,6 @@ ENV/
 output/
 out/
 results/
+
+# Docs de apoio (referência local, não fazem parte da entrega)
+data/headers_*.txt
