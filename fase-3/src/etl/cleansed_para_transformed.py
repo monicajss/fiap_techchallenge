@@ -150,6 +150,8 @@ df_harmonized = (
         '1_i_2_regiao_onde_mora'
     ], termos=['regiao', 'mora']))
     .withColumn('modelo_trabalho', coalesce_cols([
+        'p2_r_atualmente_qual_a_sua_forma_de_trabalho',
+        'p1_r_modelo_de_trabalho_atual',
         '2_r_modelo_de_trabalho_atual',
         '2_q_modelo_de_trabalho_atual',
     ], termos=['modelo', 'trabalho', 'atual']))

@@ -61,8 +61,8 @@ tech-challenge-3/
 
 - Raw: copia fiel dos CSVs de origem, particionada por ano na camada seguinte.
 - Cleansed yearly: limpeza tecnica por ano (nomes de colunas, encoding, vazios de string e duplicidades).
-- Transformed yearly: harmonizacao canonica entre anos, com tipos padronizados e campos semanticos comuns.
-- Curated: agregacoes de negocio prontas para consumo no Athena.
+- Transformed yearly: harmonizacao canonica entre anos, com tipos padronizados e campos semanticos comuns em nível atômico (1 linha por respondente). É a base consultada pelo Athena para cruzamentos analíticos multidimensionais.
+- Curated: datamarts pré-agregados por dimensão para relatórios executivos diretos.
 
 Os jobs gravam os dados em Parquet e recebem o nome do bucket como argumento:
 
@@ -72,8 +72,7 @@ cleansed_para_transformed.py  Cleansed/yearly -> Transformed/yearly
 transformed_para_curated.py   Transformed/yearly -> Curated
 ```
 
-Os resultados exportados das análises ficam em `data/outputs/`. As consultas usadas
-para responder às perguntas do desafio estão em `src/sql/queries_athena.sql`.
+Os resultados exportados das análises ficam em `data/outputs/`. As consultas analíticas executadas via Amazon Athena sobre a camada Transformed para responder às 7 perguntas do desafio estão em `src/sql/queries_athena.sql`.
 
 ## Regras importantes de modelagem
 
