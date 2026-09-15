@@ -31,13 +31,19 @@ Construir um fluxo ponta a ponta para:
 ```text
 tech-challenge-3/
   data/
-    dataset-2023-2024.csv
-    dataset-2024-2025.csv
-    dataset-2025-2026.csv
+    raw/
+      dataset-2023-2024.csv
+      dataset-2024-2025.csv
+      dataset-2025-2026.csv
+    outputs/
+      resultados_pergunta_1.csv ... resultados_pergunta_7.csv
   src/
-    raw_para_cleansed.py
-    cleansed_para_transformed.py
-    transformed_para_curated.py
+    etl/
+      raw_para_cleansed.py
+      cleansed_para_transformed.py
+      transformed_para_curated.py
+    sql/
+      queries_athena.sql
   notebooks/
     notebook.ipynb
   arquitetura-tech-challenge.drawio
@@ -53,10 +59,21 @@ tech-challenge-3/
 
 ## Camadas de dados
 
-- Raw: copia fiel dos CSVs de origem.
-- Cleansed yearly: limpeza tecnica por ano (nomes de colunas, encoding e vazios de string).
-- Transformed yearly: harmonizacao canonica entre anos.
-- Curated: agregacoes de negocio prontas para consumo.
+- Raw: copia fiel dos CSVs de origem, particionada por ano na camada seguinte.
+- Cleansed yearly: limpeza tecnica por ano (nomes de colunas, encoding, vazios de string e duplicidades).
+- Transformed yearly: harmonizacao canonica entre anos, com tipos padronizados e campos semanticos comuns.
+- Curated: agregacoes de negocio prontas para consumo no Athena.
+
+Os jobs gravam os dados em Parquet e recebem o nome do bucket como argumento:
+
+```text
+raw_para_cleansed.py          Raw -> Cleansed/yearly
+cleansed_para_transformed.py  Cleansed/yearly -> Transformed/yearly
+transformed_para_curated.py   Transformed/yearly -> Curated
+```
+
+Os resultados exportados das análises ficam em `data/outputs/`. As consultas usadas
+para responder às perguntas do desafio estão em `src/sql/queries_athena.sql`.
 
 ## Regras importantes de modelagem
 
@@ -118,15 +135,21 @@ aws s3api put-object --bucket $BUCKET --key archives/scripts/
 
 ```bash
 # Subir os 3 arquivos brutos para a Raw
-aws s3 cp "<caminho-arquivo-local>" "s3://$BUCKET/raw/state-of-data/"
-aws s3 cp "<caminho-arquivo-local>" "s3://$BUCKET/raw/state-of-data/"
-aws s3 cp "<caminho-arquivo-local>" "s3://$BUCKET/raw/state-of-data/"
+for arquivo in fase-3/data/raw/*.csv; do
+  aws s3 cp "$arquivo" "s3://$BUCKET/raw/state-of-data/"
+done
 
 # Verificar se subiu corretamente
 aws s3 ls s3://$BUCKET/raw/ --recursive
 ```
 
-### Subir o arquivo de script no Glue
+### Subir os scripts de ETL no Glue
+
+Os scripts estão em `src/etl/`. Crie um Glue Job para cada etapa, nesta ordem:
+
+1. `raw_para_cleansed.py`
+2. `cleansed_para_transformed.py`
+3. `transformed_para_curated.py`
 
 1. Na console, busque por AWS Glue.
 2. Vá em ETL Jobs.
