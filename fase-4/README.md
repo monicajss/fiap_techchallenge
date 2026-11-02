@@ -29,7 +29,7 @@ Foi utilizado o dataset [Amazon Sales Dataset, no Kaggle](https://www.kaggle.com
 - 22 colunas na base tratada.
 - 1.351 valores distintos de `product_id`.
 - `record_id` único para identificar cada linha da fonte.
-- Arquivo CSV tratado exportado em UTF-8 com BOM.
+- Arquivo CSV tratado exportado em UTF-8 com BOM (Marca de Ordem dos Bytes).
 - Base original preservada em `data/raw/amazon.csv`.
 
 ## Limitações
