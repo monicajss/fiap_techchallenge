@@ -51,7 +51,7 @@ fase-4/
 │       ├── amazon_powerbi.csv
 │       └── dicionario_dados_amazon.csv
 ├── notebooks/
-│   └── 01_exploracao_tipos_dados_amazon.ipynb
+│   └── 01_exploracao_dados_amazon.ipynb
 └── powerbi/
     └── README.md
 ```
@@ -67,7 +67,7 @@ A partir da pasta `fase-4`, instale as dependências mínimas e abra o notebook:
 
 ```bash
 python -m pip install pandas notebook
-jupyter notebook notebooks/01_exploracao_tipos_dados_amazon.ipynb
+jupyter notebook notebooks/01_exploracao_dados_amazon.ipynb
 ```
 
 Execute as células em ordem. A pasta `data/processed/` é criada automaticamente, se necessário, e recebe os arquivos tratados ao final da validação.
