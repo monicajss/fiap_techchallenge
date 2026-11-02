@@ -51,6 +51,8 @@ fiap_techchallenge/
 └── fase-5/
 ```
 
+Projeto adicionado: [Fase 4 — Amazon Product Performance & Customer Insights](fase-4/README.md), com exploração e preparação dos dados de produtos da Amazon para o dashboard no Power BI.
+
 Dentro de cada fase, podem ser incluídos arquivos como:
 
 - `README.md` da fase

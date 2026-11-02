@@ -1,0 +1,26 @@
+﻿coluna,natureza,tipo_recomendado_power_bi,tratamento_e_uso
+record_id,Chave técnica da linha,Texto/inteiro,Criada na limpeza; identifica cada registro da fonte.
+product_id,Identificador de produto,Texto,Preservar zeros/letras; não somar nem converter em número.
+product_name,Nome do produto,Texto,Descrição curta para tabelas e filtros.
+category_path,Caminho hierárquico categórico,Texto + níveis,Mantido como caminho original e dividido em níveis.
+discounted_price,Preço monetário,Número decimal,Remover símbolo ₹ e separador de milhar; moeda de origem INR.
+actual_price,Preço monetário,Número decimal,Remover símbolo ₹ e separador de milhar; moeda de origem INR.
+discount_percentage,Percentual,Número decimal (0 a 1),Remover % e dividir por 100 para formatação percentual no Power BI.
+rating,Avaliação,Número decimal,Converter para número; marcador inválido vira nulo.
+rating_count,Contagem,Número inteiro anulável,Remover separador de milhar; ausências permanecem nulas.
+about_product,Descrição longa,Texto,Manter como texto; revisar tamanho antes de carregar no modelo.
+user_id,Identificador de usuário,Não exportado,Não é necessário para indicadores agregados.
+user_name,Nome de usuário,Não exportado,Removido do arquivo analítico para evitar exposição desnecessária.
+review_id,Identificador de review,Não exportado,Não pode identificar linhas de review após agregação na fonte.
+review_title,Título de reviews agrupados,Texto,Preservado agregado; não separar por vírgula sem fonte estruturada.
+review_content,Conteúdo de reviews agrupados,Texto,Preservado agregado; vírgulas também ocorrem dentro do texto.
+img_link,URL de imagem,Texto/URL,Manter como texto; opcional para visuais com imagem.
+product_link,URL de produto,Texto/URL,Manter como texto; pode ser configurada como categoria Web URL.
+category_level_1,Nível 1 da categoria,Texto categórico,Derivada do caminho de categoria separado por |; níveis inexistentes ficam nulos.
+category_level_2,Nível 2 da categoria,Texto categórico,Derivada do caminho de categoria separado por |; níveis inexistentes ficam nulos.
+category_level_3,Nível 3 da categoria,Texto categórico,Derivada do caminho de categoria separado por |; níveis inexistentes ficam nulos.
+category_level_4,Nível 4 da categoria,Texto categórico,Derivada do caminho de categoria separado por |; níveis inexistentes ficam nulos.
+category_level_5,Nível 5 da categoria,Texto categórico,Derivada do caminho de categoria separado por |; níveis inexistentes ficam nulos.
+category_level_6,Nível 6 da categoria,Texto categórico,Derivada do caminho de categoria separado por |; níveis inexistentes ficam nulos.
+category_level_7,Nível 7 da categoria,Texto categórico,Derivada do caminho de categoria separado por |; níveis inexistentes ficam nulos.
+category_depth,Profundidade da hierarquia,Número inteiro,Quantidade de níveis preenchidos na categoria.
