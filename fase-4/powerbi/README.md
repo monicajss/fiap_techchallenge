@@ -7,7 +7,7 @@ Fonte de dados: `../data/processed/Amazon_BI_Kit.xlsx` (aba `Base_PowerBI`), com
 O dicionário das colunas está em `../data/processed/dicionario_dados_amazon.csv`.
 
 Preços convertidos de INR para BRL com fator 0,05799.
-Requer Power BI Desktop de outubro de 2026 ou mais novo.
+Requer Power BI Desktop de outubro de 2026 ou mais recente.
 
 Para atualizar os dados em outro computador: Página Inicial → Transformar dados →
 Configurações da fonte de dados → Alterar Fonte → selecionar o Excel da pasta `data/processed`.
